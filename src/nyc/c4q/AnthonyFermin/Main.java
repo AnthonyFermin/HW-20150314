@@ -52,6 +52,7 @@ public class Main {
         return longDateFormat;
     }
 
+    //method for pausing the program for a certain amount
     public static void sleepTimer(int sleepTime){
         try {
             Thread.sleep(sleepTime);
@@ -61,14 +62,16 @@ public class Main {
 
     }
 
+    //method for print a select number of spaces
     public static void printSpaces(int numOfSpaces){
         for(int i = 0; i < numOfSpaces; i++){
             System.out.print(" ");
         }
     }
 
+    //takes a string as a parameter and outputs it slowly character by character
     public static void slowPrintString(String text){
-        int pauseTime = 40;
+        int pauseTime = 20;
 
         for(int i = 0; i < text.length(); i++){
 
@@ -77,7 +80,7 @@ public class Main {
                 pauseTime = pauseTime * 2;
             }
             else{
-                pauseTime = 40;
+                pauseTime = 20;
             }
             sleepTimer(pauseTime);
 
@@ -85,6 +88,8 @@ public class Main {
 
     }
 
+    //takes a string as a parameter and outputs it slowly character by character
+    //also takes in an int that determines speed of printing
     public static void slowPrintString(String text, int pauseTimeMS){
 
         int pauseTime = pauseTimeMS;
@@ -103,7 +108,7 @@ public class Main {
         }
     }
 
-
+    //MAIN GAME
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String response = "";
@@ -149,13 +154,15 @@ public class Main {
         }
         sleepTimer(2000);
         slowPrintString("\n\n\n\n\n\n\n\n\n\n\n\n", 100);
+
+        //Main Game Loop - always runs it at least once then repeats game if boolean "stillPlaying" is true
         do{
             /*Game Intro*/
             slowPrintString("It is " + getDate() + " and you're working a double at the Post Office...\n\n" +
                     "Paul: Hey newbie, how was your first week at work?........... Don't answer that, I already know it was hectic... always is! \n" +
-                    "um...., sorry I'm bad with names. What was your name again?\n\nYou: ", 30);
+                    "um...., sorry I'm bad with names. What was your name again?\n\nYou: ");
 
-            String playerName = input.next();
+            String playerName = input.nextLine();
 
             slowPrintString("\nPaul: Right, right. " + playerName +
                     ", I won't forget! Now get back to work!! There's no way you're getting paid if you just sit around!\n\n");
@@ -165,18 +172,15 @@ public class Main {
                     "you realize that there's a red envelope on the floor. You reach over and grab the envelope and through the constant stream of \n" +
                     "sorting sounds and fidgeting paper, you hear a \"PSSSST\"\n\n" +
 
-                    "NARRATOR: You look around... no one else seemed to notice the sound. You hear another \"PSSSST\" coming from the utility closet... What do you do???\n\n " +
-                    "[Investigate]  [Ignore]  [Tell Security]\n");
-            System.out.print(">");
-            response = input.nextLine();
-            slowPrintString(".......\n\n");
+                    "NARRATOR: You look around... no one else seemed to notice the sound. You hear another \"PSSSST\" coming from the utility closet... What do you do???\n" +
+                    "[Ignore] [Tell Security] [Investigate]\n\n ");
 
-
+            //prompts user for response and checks if its correct.
             do {
 
                 if (response.equalsIgnoreCase("Investigate")) {
                     slowPrintString("NARRATOR: You slowly open the door to the dark utility closet. You look inside and think \"Wow, this is a spacious utility closet\".\n" +
-                            "Then you hear breathing... \n");
+                            "Then you hear breathing... \n\n");
                     checkResponse = true;
                     break;
                 } else if (response.equalsIgnoreCase("Ignore")) {
@@ -189,12 +193,13 @@ public class Main {
                             "When you finish your long shift, you gather your things and go home. You enter your home and look at the couch.\n \n");
                     checkResponse = false;
                 } else {
-                    System.err.println("NARRATOR: Please Enter a valid response!! \n\n [Investigate]  [Ignore]  [Tell Security]\n");
+                    System.err.println("NARRATOR: Please Enter a valid response!! \n\n [Ignore] [Tell Security] [Investigate]\n");
                     checkResponse = true;
                     response = input.nextLine();
                 }
             } while (checkResponse);
 
+            //if user selected investigate response, then continues here
             if (checkResponse) {
                 slowPrintString("NARRATOR: The breathing gets louder.... then louder\n");
                 slowPrintString("Then it gets closer and closer!!! ",80);
@@ -203,21 +208,26 @@ public class Main {
                 slowPrintString("Rodrick: Hello " + playerName + ", I've been expecting you.... my name  is......Rodrick!\n\n" +
                         "Rodrick: I'm here to offer you a drink. Choose the blue solo cup if you just want to go back to your boring life....\n" +
                         "but choose the red solo cup, and you'll learn the TRUTH of it all.... MUAHAHHahahahahHAHAHa *cough*.... now choose...\n\n");
-                slowPrintString("NARRATOR: He holds up a cup in each hand expecting you to choose one. [red] [blue]");
-                response = input.next();
+                slowPrintString("NARRATOR: He holds up a cup in each hand expecting you to choose one. [red] [blue]\n\n");
+                response = input.nextLine();
                 if(response.equalsIgnoreCase("red")){
                     slowPrintString("NARRATOR: You go for the red cup! Rodrick giggles with excitement as you chug the contents of the cup.\n\n" +
-                    "NARRATOR: You then look at Rodrick when your vision suddenly begins to fade into black..............................\n" +
-                    "moments later, your vision comes back and you're on your couch....you think to yourself \"Was that a dream?\"");
+                            "NARRATOR: You then look at Rodrick when your vision suddenly begins to fade into black..............................\n" +
+                            "moments later, your vision comes back and you're on your couch....you think to yourself \"Was that a dream?\"\n\n");
                 }else if(response.equalsIgnoreCase("blue")){
-
+                    slowPrintString("NARRATOR: You grab the blue solo cup and get ready to drink it.........\n" +
+                            "As Rodrick slaps the cup out of your hand he says...\n\n" +
+                            "Rodrick: You're no fun! That one's just water ya lunatic!\n\n" +
+                            "NARRATOR: He disappears into the shadows never to be heard from again. The little excitement you just had was the pinnacle\n" +
+                            "of excitement for your entire life.... and probably the rest of your life. You finish your shift then head home.\n\n");
                 }else{
                     slowPrintString("Rodrick: Bahhhh, don't you speak english? Nevermind......\n\n " +
-                    "NARRATOR: Disappears into the shadows and you shrug it off. When you're done with your shift you head home for a well deserved nap\n\n");
+                            "NARRATOR: Disappears into the shadows and you shrug it off. When you're done with your shift you head home for a well deserved nap\n\n");
                 }
 
             }
 
+            //end of game
 
             String enterDreamState = "After a long day at work, you have no choice but to collapse onto your couch and doze off into the eternal night";
             slowPrintString(enterDreamState);
@@ -225,9 +235,10 @@ public class Main {
             slowPrintString("GAME OVER.............");
             System.out.println("\n\n\n");
 
+            //a do/while loop that asks if the user wants to play again and updates the "stillPlaying" boolean accordingly
             do {
                 slowPrintString("Do you want to play again? [yes or no?]\n");
-                response = input.next();
+                response = input.nextLine();
                 if (response.equalsIgnoreCase("yes") || response.equalsIgnoreCase("y") || response.equalsIgnoreCase("ya")) {
                     stillPlaying = true;
                     checkResponse = false;
@@ -241,28 +252,8 @@ public class Main {
 
         }while(stillPlaying);
 
+        //Good bye message
+        slowPrintString("\n\nNARRATOR: Good Bye!!!");
 
-
-
-
-
-
-
-        //Different mini games that's randomized, if you win 3 out of 5 then you Win the whole game!!!
-        //TIC TAC TOE
-
-        /*
-        System.out.println(" 1 | 2 | 3 ");
-        System.out.println(" ---------");
-        System.out.println(" 4 | 5 | 6 ");
-        System.out.println(" ---------");
-        System.out.println(" 7 | 8 | 9 ");
-        */
-
-        //HOP (with wind and direction)
-
-        //last game of blackJack
-
-        //
     }
 }
